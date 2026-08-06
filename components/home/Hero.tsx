@@ -26,42 +26,7 @@ export function Hero() {
         <div className="absolute top-12 left-10 w-72 h-72 rounded-full bg-blue-600/15 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-purple-600/15 blur-[110px] pointer-events-none" />
 
-        {/* Floating Animated Badges */}
-        <div className="hidden lg:block absolute top-32 left-[12%] animate-float pointer-events-none">
-          <div className="p-3 rounded-2xl glass-panel border border-cyan-500/30 flex items-center space-x-3 shadow-xl">
-            <div className="p-2 rounded-xl bg-cyan-500/20 text-cyan-400">
-              <Zap className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-xs font-bold text-white">Sub-Second Speed</div>
-              <div className="text-[10px] text-slate-400">Core Web Vitals 98+</div>
-            </div>
-          </div>
-        </div>
 
-        <div className="hidden lg:block absolute bottom-36 right-[12%] animate-float [animation-delay:2s] pointer-events-none">
-          <div className="p-3 rounded-2xl glass-panel border border-purple-500/30 flex items-center space-x-3 shadow-xl">
-            <div className="p-2 rounded-xl bg-purple-500/20 text-purple-400">
-              <Code className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-xs font-bold text-white">Next.js 15 & React 19</div>
-              <div className="text-[10px] text-slate-400">Enterprise Stack</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden lg:block absolute top-40 right-[15%] animate-float [animation-delay:4s] pointer-events-none">
-          <div className="p-3 rounded-2xl glass-panel border border-emerald-500/30 flex items-center space-x-3 shadow-xl">
-            <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400">
-              <Star className="w-5 h-5 fill-emerald-400" />
-            </div>
-            <div>
-              <div className="text-xs font-bold text-white">99% Client Rating</div>
-              <div className="text-[10px] text-slate-400">100+ Projects Done</div>
-            </div>
-          </div>
-        </div>
 
         {/* Content Container */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
