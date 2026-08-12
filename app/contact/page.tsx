@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
-import { Sparkles, Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle2 } from "lucide-react";
+import { Sparkles, Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { COMPANY_INFO } from "@/constants/companyData";
 
 const contactSchema = z.object({
@@ -21,11 +21,14 @@ type FormValues = z.infer<typeof contactSchema>;
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(contactSchema),
@@ -33,13 +36,33 @@ export default function ContactPage() {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    await new Promise((res) => setTimeout(res, 1200));
-    setIsSubmitting(false);
-    router.push("/thank-you");
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setSubmissionSuccess(true);
+        reset();
+      } else {
+        setErrorMessage(json.error || "Failed to deliver inquiry. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("Network error. Please check your internet connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const whatsappUrl = `https://wa.me/${COMPANY_INFO.contact.whatsapp}?text=${encodeURIComponent(
-    "Hello MitraTech, I would like to schedule a project consultation."
+    "Hello Mitratech Services, I would like to schedule a project consultation."
   )}`;
 
   return (
@@ -56,7 +79,7 @@ export default function ContactPage() {
         </h1>
 
         <p className="text-slate-300 text-base sm:text-lg max-w-xl mx-auto">
-          Have a question or looking to start a new project? Fill out the form below or connect with us directly via phone or WhatsApp.
+          Have a question or looking to start a new project? Submit your inquiry below to deliver details directly to <span className="text-cyan-400 font-semibold">support@mitratechservices.in</span>.
         </p>
       </section>
 
@@ -93,8 +116,10 @@ export default function ContactPage() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-bold text-white">Direct Email</div>
-                  <div className="text-slate-400">{COMPANY_INFO.contact.email}</div>
+                  <div className="font-bold text-white">Direct Support Email</div>
+                  <a href="mailto:support@mitratechservices.in" className="text-cyan-400 hover:underline">
+                    support@mitratechservices.in
+                  </a>
                 </div>
               </div>
 
@@ -122,102 +147,138 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Interactive Map Placeholder */}
+          {/* Interactive Map Location */}
           <div className="relative h-64 rounded-3xl overflow-hidden glass-panel border border-slate-800 flex items-center justify-center p-6 text-center">
             <div className="space-y-2">
               <MapPin className="w-8 h-8 text-blue-400 mx-auto animate-bounce" />
-              <h3 className="text-base font-bold font-heading text-white">Pune Headquarters</h3>
+              <h3 className="text-base font-bold font-heading text-white">Pune Office</h3>
               <p className="text-xs text-slate-400">Handewadi, Hadapsar, Pune, Maharashtra 411028</p>
             </div>
           </div>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact Form Container */}
         <div className="lg:col-span-7 p-8 sm:p-10 rounded-3xl glass-panel border border-slate-800 space-y-6">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-bold font-heading text-white">Send Us a Project Inquiry</h2>
-            <p className="text-xs text-slate-400">Fill in your requirements for a free estimate and project roadmap.</p>
-          </div>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Full Name *</label>
-                <input
-                  {...register("fullName")}
-                  type="text"
-                  placeholder="John Doe"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
-                />
-                {errors.fullName && <p className="text-red-400 text-xs mt-1">{errors.fullName.message}</p>}
+          {submissionSuccess ? (
+            <div className="py-12 text-center space-y-5 animate-fadeIn">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mb-2">
+                <CheckCircle2 className="w-12 h-12 animate-bounce" />
               </div>
-
-              <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Email Address *</label>
-                <input
-                  {...register("email")}
-                  type="email"
-                  placeholder="john@company.com"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
-                />
-                {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Phone Number *</label>
-                <input
-                  {...register("phone")}
-                  type="tel"
-                  placeholder="+91 98765 43210"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
-                />
-                {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Service Interested In *</label>
-                <select
-                  {...register("service")}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500 text-sm"
+              <h2 className="text-3xl font-bold text-white font-heading">Inquiry Submitted Successfully!</h2>
+              <p className="text-slate-300 max-w-md mx-auto text-sm leading-relaxed">
+                Your project inquiry has been dispatched to <span className="text-cyan-400 font-semibold">support@mitratechservices.in</span>. A Senior Solutions Architect from Mitratech Services will review your requirements and reply within 24 hours.
+              </p>
+              
+              <div className="pt-4 flex items-center justify-center space-x-3">
+                <button
+                  onClick={() => setSubmissionSuccess(false)}
+                  className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition-colors"
                 >
-                  <option value="Website Design">Website Design & UI/UX</option>
-                  <option value="Website Development">Website Development (Next.js / WordPress)</option>
-                  <option value="Web Application Development">Web Application (SaaS / AI / Dashboard)</option>
-                  <option value="Social Media Marketing">Social Media Marketing & Reels</option>
-                  <option value="Creative Graphic Design">Creative Graphic Design & Branding</option>
-                  <option value="Google Ads">Google Ads (PPC Campaigns)</option>
-                </select>
+                  Send Another Message
+                </button>
               </div>
             </div>
+          ) : (
+            <>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-bold font-heading text-white">Send Us a Project Inquiry</h2>
+                <p className="text-xs text-slate-400">Inquiries are sent directly to <span className="text-cyan-400 font-semibold">support@mitratechservices.in</span></p>
+              </div>
 
-            <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Project Message & Goals *</label>
-              <textarea
-                {...register("message")}
-                rows={4}
-                placeholder="Describe your project vision, target timeline, or specific features..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
-              />
-              {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-sm shadow-xl shadow-blue-500/25 flex items-center justify-center space-x-2 transition-all active:scale-95 disabled:opacity-50"
-            >
-              {isSubmitting ? (
-                <span>Sending Message...</span>
-              ) : (
-                <>
-                  <span>Submit Inquiry</span>
-                  <Send className="w-4 h-4" />
-                </>
+              {errorMessage && (
+                <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center space-x-2 text-red-400 text-xs font-medium">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
               )}
-            </button>
-          </form>
+
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1">Full Name *</label>
+                    <input
+                      {...register("fullName")}
+                      type="text"
+                      placeholder="John Doe"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
+                    />
+                    {errors.fullName && <p className="text-red-400 text-xs mt-1">{errors.fullName.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1">Email Address *</label>
+                    <input
+                      {...register("email")}
+                      type="email"
+                      placeholder="john@company.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
+                    />
+                    {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1">Phone Number *</label>
+                    <input
+                      {...register("phone")}
+                      type="tel"
+                      placeholder="+91 98765 43210"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
+                    />
+                    {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-slate-300 mb-1">Service Interested In *</label>
+                    <select
+                      {...register("service")}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500 text-sm"
+                    >
+                      <option value="Website Design">Website Design & UI/UX</option>
+                      <option value="Website Development">Website Development (Next.js / WordPress)</option>
+                      <option value="Web Application Development">Web Application (SaaS / AI / Dashboard)</option>
+                      <option value="Social Media Marketing">Social Media Marketing & Reels</option>
+                      <option value="Creative Graphic Design">Creative Graphic Design & Branding</option>
+                      <option value="Google Ads">Google Ads (PPC Campaigns)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1">Project Message & Goals *</label>
+                  <textarea
+                    {...register("message")}
+                    rows={4}
+                    placeholder="Describe your project vision, target timeline, or specific features..."
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
+                  />
+                  {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-sm shadow-xl shadow-blue-500/25 flex items-center justify-center space-x-2 transition-all active:scale-95 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center space-x-2">
+                      <svg className="w-5 h-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                      </svg>
+                      <span>Submitting Inquiry...</span>
+                    </span>
+                  ) : (
+                    <>
+                      <span>Submit Inquiry to support@mitratechservices.in</span>
+                      <Send className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </section>
     </div>

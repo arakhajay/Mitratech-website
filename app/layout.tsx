@@ -22,10 +22,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: {
     default: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
-    template: "%s | MitraTech Digital Agency",
+    template: "%s | Mitratech Services (OPC) Pvt Ltd",
   },
   description:
-    "MitraTech is a premium software development and digital marketing agency specializing in custom website design, Next.js web applications, SaaS platforms, branding, and Google Ads PPC growth.",
+    "Mitratech Services (OPC) Pvt Ltd is a premium software development and digital marketing agency specializing in custom website design, Next.js web applications, SaaS platforms, branding, and Google Ads PPC growth.",
   keywords: [
     "Software Development Agency",
     "Website Design Studio",
@@ -35,13 +35,14 @@ export const metadata: Metadata = {
     "Google Ads PPC Agency",
     "Branding & Graphic Design",
     "MitraTech",
+    "Mitratech Services",
   ],
-  authors: [{ name: "MitraTech Digital Solutions" }],
+  authors: [{ name: "Mitratech Services (OPC) Pvt Ltd" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mitratech.com",
-    siteName: "MitraTech Digital Solutions",
+    url: "https://mitratechservices.in",
+    siteName: "Mitratech Services (OPC) Pvt Ltd",
     title: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
     description:
       "Enterprise-grade website design, full-stack web applications, SaaS engineering, and high-ROI digital marketing.",
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
         url: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
         width: 1200,
         height: 630,
-        alt: "MitraTech Enterprise Digital Agency",
+        alt: "Mitratech Services Enterprise Digital Agency",
       },
     ],
   },

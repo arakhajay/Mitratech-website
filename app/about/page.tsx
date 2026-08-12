@@ -3,12 +3,12 @@ import Metadata from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Sparkles, Target, Compass, Award, ShieldCheck, Users, TrendingUp, Lightbulb, ArrowRight, CheckCircle2 } from "lucide-react";
-import { COMPANY_INFO, TEAM_MEMBERS } from "@/constants/companyData";
+import { COMPANY_INFO } from "@/constants/companyData";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
 export const metadata = {
-  title: "About Us | MitraTech Digital Agency",
-  description: "Learn about MitraTech's story, mission, core values, leadership team, and history of delivering enterprise web products.",
+  title: "About Us | Mitratech Services (OPC) Pvt Ltd",
+  description: "Learn about Mitratech Services (OPC) Pvt Ltd's story, mission, core values, and history of delivering enterprise web products.",
 };
 
 export default function AboutPage() {
@@ -97,29 +97,6 @@ export default function AboutPage() {
               <div>
                 <h4 className="text-base font-bold font-heading text-white">{item.title}</h4>
                 <p className="text-xs text-slate-400 mt-1">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Leadership Team */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl font-bold font-heading text-white">Meet Our Leadership</h2>
-          <p className="text-slate-400 text-sm">Experienced architects, designers, and marketing strategists behind MitraTech.</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {TEAM_MEMBERS.map((member, idx) => (
-            <div key={idx} className="rounded-2xl glass-panel border border-slate-800 overflow-hidden space-y-4 p-5">
-              <div className="relative w-full h-60 rounded-xl overflow-hidden">
-                <Image src={member.image} alt={member.name} fill className="object-cover" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold font-heading text-white">{member.name}</h3>
-                <p className="text-xs text-cyan-400 font-semibold">{member.role}</p>
-                <p className="text-xs text-slate-400 mt-2 leading-relaxed">{member.bio}</p>
               </div>
             </div>
           ))}

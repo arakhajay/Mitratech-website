@@ -14,6 +14,7 @@ import {
   Instagram,
   Github,
   CheckCircle2,
+  ExternalLink,
 } from "lucide-react";
 import { COMPANY_INFO } from "@/constants/companyData";
 import { SERVICES_DATA } from "@/constants/servicesData";
@@ -37,9 +38,9 @@ export function Footer() {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-purple-600/10 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800/80">
           {/* Brand Info & Newsletter */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 pr-4">
             <Link href="/" className="flex items-center space-x-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-cyan-400 p-0.5 shadow-md shadow-blue-500/20">
                 <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
@@ -51,7 +52,7 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               {COMPANY_INFO.aboutShort}
             </p>
 
@@ -132,7 +133,7 @@ export function Footer() {
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
               Company
             </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2 text-xs text-slate-400">
               <li>
                 <Link href="/" className="hover:text-blue-400 transition-colors">
                   Home
@@ -140,12 +141,12 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/about" className="hover:text-blue-400 transition-colors">
-                  About MitraTech
+                  About Us
                 </Link>
               </li>
               <li>
                 <Link href="/portfolio" className="hover:text-blue-400 transition-colors">
-                  Case Studies & Portfolio
+                  Portfolio
                 </Link>
               </li>
               <li>
@@ -155,12 +156,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/blog" className="hover:text-blue-400 transition-colors">
-                  Latest Blog Insights
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-blue-400 transition-colors">
-                  Careers & Hiring
+                  Blog & Articles
                 </Link>
               </li>
               <li>
@@ -171,31 +167,58 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services Links */}
+          {/* SaaS Products */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Core Services
+              SaaS Products
             </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
-              {SERVICES_DATA.map((srv) => (
-                <li key={srv.id}>
-                  <Link
-                    href={`/services/${srv.slug}`}
-                    className="hover:text-cyan-400 transition-colors"
-                  >
-                    {srv.title}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li>
+                <Link href="/products" className="hover:text-cyan-400 font-semibold transition-colors">
+                  Products Hub
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/zivox-agent" className="hover:text-cyan-400 transition-colors">
+                  Zivox Agent (AI Bot)
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://www.zivoxagent.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-slate-500 hover:text-cyan-400 transition-colors flex items-center space-x-1"
+                >
+                  <span>Zivox Official App</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
+              <li className="pt-1">
+                <Link href="/products/leadspark" className="hover:text-purple-400 transition-colors">
+                  LeadSpark AI Scraper
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://leadspark-apify.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-slate-500 hover:text-purple-400 transition-colors flex items-center space-x-1"
+                >
+                  <span>LeadSpark App</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Contact Details */}
+          {/* Reach Us */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
               Reach Us
             </h4>
-            <ul className="space-y-3 text-xs text-slate-400">
+            <ul className="space-y-2.5 text-xs text-slate-400">
               <li className="flex items-start space-x-2.5">
                 <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
                 <span>{COMPANY_INFO.contact.address}</span>
@@ -218,7 +241,7 @@ export function Footer() {
 
         {/* Bottom Copyright & Legal */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0">
-          <p>© {new Date().getFullYear()} MitraTech Digital Solutions. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Mitratech Services (OPC) Pvt Ltd. All rights reserved.</p>
           <div className="flex items-center space-x-6">
             <Link href="/privacy" className="hover:text-slate-300 transition-colors">
               Privacy Policy

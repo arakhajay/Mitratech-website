@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { X, Send, CheckCircle2, Sparkles } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { X, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters."),
@@ -27,7 +26,7 @@ interface QuickConsultModalProps {
 export function QuickConsultModal({ isOpen, onClose, defaultService }: QuickConsultModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -45,17 +44,29 @@ export function QuickConsultModal({ isOpen, onClose, defaultService }: QuickCons
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    // Simulate API call processing
-    await new Promise((res) => setTimeout(res, 1200));
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    reset();
+    setErrorMessage(null);
 
-    setTimeout(() => {
-      onClose();
-      setIsSuccess(false);
-      router.push("/thank-you");
-    }, 1500);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        setIsSuccess(true);
+        reset();
+      } else {
+        setErrorMessage(json.error || "Failed to deliver inquiry. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -79,23 +90,36 @@ export function QuickConsultModal({ isOpen, onClose, defaultService }: QuickCons
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mb-2">
               <CheckCircle2 className="w-10 h-10 animate-bounce" />
             </div>
-            <h3 className="text-2xl font-bold text-white font-heading">Consultation Request Received!</h3>
+            <h3 className="text-2xl font-bold text-white font-heading">Inquiry Delivered!</h3>
             <p className="text-slate-300 max-w-md mx-auto text-sm">
-              Thank you for reaching out. A Senior Solutions Architect from MitraTech will review your project details and contact you within 24 hours.
+              Your message has been sent to <span className="text-cyan-400 font-semibold">support@mitratechservices.in</span>. A Senior Solutions Architect will contact you within 24 hours.
             </p>
+            <button
+              onClick={onClose}
+              className="mt-4 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all"
+            >
+              Done
+            </button>
           </div>
         ) : (
           <div>
             <div className="flex items-center space-x-2 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-1">
               <Sparkles className="w-4 h-4" />
-              <span>Transform Your Vision</span>
+              <span>Mitratech Services (OPC) Pvt Ltd</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white font-heading mb-2">
               Get Free Project Consultation
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Fill in your project requirements below to receive a custom roadmap and proposal within 24 hours.
+              Fill in your requirements below. Inquiries are sent directly to <span className="text-cyan-400 font-semibold">support@mitratechservices.in</span>.
             </p>
+
+            {errorMessage && (
+              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center space-x-2 text-red-400 text-xs font-medium mb-4">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -172,11 +196,11 @@ export function QuickConsultModal({ isOpen, onClose, defaultService }: QuickCons
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                     </svg>
-                    <span>Submitting Request...</span>
+                    <span>Sending Inquiry...</span>
                   </span>
                 ) : (
                   <>
-                    <span>Request Consultation</span>
+                    <span>Submit Inquiry</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}

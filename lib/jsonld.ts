@@ -2,9 +2,9 @@ export function getOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "MitraTech",
-    "url": "https://mitratech.com",
-    "logo": "https://mitratech.com/logo.png",
+    "name": "Mitratech Services (OPC) Pvt Ltd",
+    "url": "https://mitratechservices.in",
+    "logo": "https://mitratechservices.in/logo.png",
     "description": "Transforming Ideas into Powerful Digital Solutions. Premium web design, web development, SaaS web apps, branding, and digital growth agency.",
     "address": {
       "@type": "PostalAddress",
@@ -17,7 +17,8 @@ export function getOrganizationSchema() {
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91-9579852657",
-      "contactType": "Customer Service",
+      "email": "support@mitratechservices.in",
+      "contactType": "Customer Support",
       "areaServed": "Worldwide",
       "availableLanguage": ["English"]
     },
@@ -33,11 +34,11 @@ export function getLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "MitraTech Digital Solutions",
+    "name": "Mitratech Services (OPC) Pvt Ltd",
     "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
     "priceRange": "$$$",
     "telephone": "+91-9579852657",
-    "email": "hello@mitratech.com",
+    "email": "support@mitratechservices.in",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Handewadi, Hadapsar",
@@ -69,7 +70,7 @@ export function getServiceSchema(serviceTitle: string, description: string) {
     "serviceType": serviceTitle,
     "provider": {
       "@type": "Organization",
-      "name": "MitraTech"
+      "name": "Mitratech Services (OPC) Pvt Ltd"
     },
     "description": description
   };

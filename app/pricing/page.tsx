@@ -63,6 +63,7 @@ export default function PricingPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {PRICING_PLANS.map((plan) => {
             const price = isAnnual ? plan.priceAnnually : plan.priceMonthly;
+            const isEnterprise = plan.id === "plan-enterprise";
 
             return (
               <div
@@ -85,19 +86,30 @@ export default function PricingPage() {
                     <p className="text-xs text-slate-400 mt-1">{plan.description}</p>
                   </div>
 
-                  <div className="flex items-baseline space-x-1">
-                    <span className="text-3xl sm:text-4xl font-extrabold font-heading text-white">
-                      ₹{price.toLocaleString("en-IN")}
-                    </span>
-                    <span className="text-xs text-slate-400">/ project</span>
-                  </div>
+                  {isEnterprise ? (
+                    <div>
+                      <span className="text-2xl sm:text-3xl font-extrabold font-heading text-white">
+                        Custom Quote
+                      </span>
+                      <span className="block text-[11px] text-cyan-400 font-semibold mt-0.5">
+                        Decided upon consultation
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-baseline space-x-1">
+                      <span className="text-3xl sm:text-4xl font-extrabold font-heading text-white">
+                        ₹{price.toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-xs text-slate-400">/ project</span>
+                    </div>
+                  )}
 
                   <button
                     onClick={() => openQuoteForPlan(plan.name)}
                     className={`w-full py-3.5 rounded-xl font-bold text-xs shadow-lg transition-all ${
                       plan.popular
                         ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-blue-500 hover:to-cyan-400 shadow-blue-500/25"
-                        : "bg-slate-800 hover:bg-slate-700 text-white"
+                        : "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700"
                     }`}
                   >
                     {plan.ctaText}
