@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.mitratechservices.in";
 
   const staticPages = [
-    "",
+    "/",
     "/about",
     "/services",
     "/products",
@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/terms",
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: route === "/" ? `${baseUrl}/` : `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: (route === "" ? "weekly" : "monthly") as "weekly" | "monthly",
     priority: route === "" ? 1.0 : route === "/services" || route === "/products" ? 0.9 : 0.8,

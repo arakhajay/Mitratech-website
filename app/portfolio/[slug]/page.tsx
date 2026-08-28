@@ -24,6 +24,12 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${project.title} Case Study | MitraTech`,
     description: project.summary,
+    alternates: {
+      canonical: `/portfolio/${slug}`,
+    },
+    openGraph: {
+      url: `/portfolio/${slug}`,
+    },
   };
 }
 

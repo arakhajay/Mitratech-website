@@ -24,6 +24,12 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${post.title} | MitraTech Blog`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      url: `/blog/${slug}`,
+    },
   };
 }
 
