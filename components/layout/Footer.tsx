@@ -43,15 +43,13 @@ export function Footer() {
           {/* Brand Info & Direct Communication */}
           <div className="lg:col-span-2 space-y-4 pr-4">
             <Link href="/" className="inline-flex items-center group" aria-label="MitraTech Home">
-              <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-md shadow-blue-500/10 group-hover:scale-105 transition-transform flex items-center justify-center">
-                <Image
-                  src="/logo.png"
-                  alt="MitraTech"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="Mitratech Services"
+                width={190}
+                height={44}
+                className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+              />
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">

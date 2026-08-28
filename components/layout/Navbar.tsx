@@ -73,18 +73,16 @@ export function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo with official logo.png (already contains brand name) */}
-          <Link href="/" className="flex items-center group" aria-label="MitraTech Home">
-            <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-blue-500/10 group-hover:scale-105 transition-transform flex items-center justify-center">
-              <Image
-                src="/logo.png"
-                alt="MitraTech"
-                width={48}
-                height={48}
-                priority
-                className="w-full h-full object-contain"
-              />
-            </div>
+          {/* Brand Logo - Pure Vector SVG */}
+          <Link href="/" className="flex items-center group py-1" aria-label="MitraTech Home">
+            <Image
+              src="/logo.svg"
+              alt="Mitratech Services"
+              width={190}
+              height={44}
+              priority
+              className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
