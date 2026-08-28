@@ -3,30 +3,31 @@ export function getOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Mitratech Services (OPC) Pvt Ltd",
-    "url": "https://mitratechservices.in",
-    "logo": "https://mitratechservices.in/logo.png",
-    "description": "Transforming Ideas into Powerful Digital Solutions. Premium web design, web development, SaaS web apps, branding, and digital growth agency.",
+    "legalName": "Mitratech Services (OPC) Pvt Ltd",
+    "url": "https://www.mitratechservices.in/",
+    "logo": "https://www.mitratechservices.in/logo.png",
+    "description": "Transforming Ideas into Powerful Digital Solutions. Premium web design, Next.js web applications, SaaS products, branding, and digital growth agency based in Pune, India.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Handewadi, Hadapsar",
       "addressLocality": "Pune",
-      "addressRegion": "MH",
+      "addressRegion": "Maharashtra",
       "postalCode": "411028",
       "addressCountry": "IN"
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91-9579852657",
+      "telephone": "+919579852657",
       "email": "support@mitratechservices.in",
       "contactType": "Customer Support",
-      "areaServed": "Worldwide",
-      "availableLanguage": ["English"]
+      "areaServed": ["IN", "US", "GB", "AE", "AU", "Worldwide"],
+      "availableLanguage": ["English", "Hindi", "Marathi"]
     },
-    "sameAs": [
-      "https://twitter.com/mitratech",
-      "https://linkedin.com/company/mitratech",
-      "https://instagram.com/mitratech"
-    ]
+    "founder": {
+      "@type": "Person",
+      "name": "Ajay Arakh",
+      "jobTitle": "Founder & Director"
+    }
   };
 }
 
@@ -35,17 +36,24 @@ export function getLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Mitratech Services (OPC) Pvt Ltd",
-    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
-    "priceRange": "$$$",
-    "telephone": "+91-9579852657",
+    "image": "https://www.mitratechservices.in/og-image.png",
+    "url": "https://www.mitratechservices.in/",
+    "logo": "https://www.mitratechservices.in/logo.png",
+    "priceRange": "₹₹",
+    "telephone": "+919579852657",
     "email": "support@mitratechservices.in",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Handewadi, Hadapsar",
       "addressLocality": "Pune",
-      "addressRegion": "MH",
+      "addressRegion": "Maharashtra",
       "postalCode": "411028",
       "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 18.4967,
+      "longitude": 73.9417
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -70,9 +78,11 @@ export function getServiceSchema(serviceTitle: string, description: string) {
     "serviceType": serviceTitle,
     "provider": {
       "@type": "Organization",
-      "name": "Mitratech Services (OPC) Pvt Ltd"
+      "name": "Mitratech Services (OPC) Pvt Ltd",
+      "url": "https://www.mitratechservices.in/"
     },
-    "description": description
+    "description": description,
+    "areaServed": "Worldwide"
   };
 }
 
@@ -87,6 +97,19 @@ export function getFAQSchema(faqs: { question: string; answer: string }[]) {
         "@type": "Answer",
         "text": faq.answer,
       },
+    })),
+  };
+}
+
+export function getBreadcrumbSchema(items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url,
     })),
   };
 }

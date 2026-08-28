@@ -1,12 +1,30 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Sparkles, Palette, Code2, Cpu, Share2, PenTool, Target, ArrowRight, CheckCircle2 } from "lucide-react";
 import { SERVICES_DATA } from "@/constants/servicesData";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
-export const metadata = {
-  title: "Core Services | MitraTech Digital Agency",
-  description: "Explore MitraTech's 6 core services: Website Design, Website Development, Web Application Development, Social Media Marketing, Graphic Design, and Google Ads.",
+export const metadata: Metadata = {
+  title: "Services",
+  description: "Explore MitraTech's 6 core services: Custom Website Design, Next.js Website Development, Web Application Development, Social Media Marketing, Graphic Design, and Google Ads PPC.",
+  alternates: {
+    canonical: "https://www.mitratechservices.in/services",
+  },
+  openGraph: {
+    title: "Services | MitraTech",
+    description: "Explore MitraTech's 6 core services: Custom Website Design, Next.js Website Development, Web Application Development, and Google Ads.",
+    url: "https://www.mitratechservices.in/services",
+    siteName: "Mitratech Services (OPC) Pvt Ltd",
+    images: [
+      {
+        url: "https://www.mitratechservices.in/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "MitraTech Digital Services",
+      },
+    ],
+  },
 };
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -25,7 +43,7 @@ export default function ServicesPage() {
       <section className="text-center max-w-4xl mx-auto px-4 space-y-6">
         <div className="inline-flex items-center space-x-2 text-xs font-bold text-blue-400 uppercase tracking-widest bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">
           <Sparkles className="w-4 h-4" />
-          <span>Full-Spectrum Digital Services</span>
+          <span>Full-Spectrum Digital Capabilities</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold font-heading text-white tracking-tight">

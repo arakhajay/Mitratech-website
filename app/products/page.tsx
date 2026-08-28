@@ -1,14 +1,31 @@
 import React from "react";
-import Metadata from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS_DATA } from "@/constants/productsData";
-import { Sparkles, ExternalLink, ArrowRight, CheckCircle2, ShieldCheck, Zap, Bot, Search } from "lucide-react";
+import { Sparkles, ExternalLink, ArrowRight, CheckCircle2, Bot, Search } from "lucide-react";
 
-export const metadata = {
-  title: "Proprietary SaaS Products & AI Platforms | MitraTech",
+export const metadata: Metadata = {
+  title: "Products",
   description:
-    "Explore MitraTech's suite of proprietary AI chatbots, lead scraping engines, and SaaS products including Zivox Agent and LeadSpark AI.",
+    "Explore MitraTech's proprietary SaaS platforms and AI automation tools including Zivox Agent (AI Customer Support) and LeadSpark AI.",
+  alternates: {
+    canonical: "https://www.mitratechservices.in/products",
+  },
+  openGraph: {
+    title: "Products | MitraTech",
+    description: "Explore MitraTech's proprietary SaaS platforms and AI automation tools.",
+    url: "https://www.mitratechservices.in/products",
+    siteName: "Mitratech Services (OPC) Pvt Ltd",
+    images: [
+      {
+        url: "https://www.mitratechservices.in/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "MitraTech Proprietary SaaS Products",
+      },
+    ],
+  },
 };
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -25,7 +42,7 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         {/* Page Hero Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center space-x-2 text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/20">
+          <div className="inline-flex items-center space-x-2 text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-4 py-2 rounded-full border border-cyan-500/20">
             <Sparkles className="w-3.5 h-3.5" />
             <span>MitraTech Product Labs</span>
           </div>

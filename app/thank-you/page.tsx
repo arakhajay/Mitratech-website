@@ -1,10 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, Home } from "lucide-react";
 
-export const metadata = {
-  title: "Thank You | MitraTech Digital Agency",
+export const metadata: Metadata = {
+  title: "Thank You",
   description: "Thank you for contacting MitraTech. Our technical team will reach out to you within 24 hours.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function ThankYouPage() {
@@ -20,7 +25,7 @@ export default function ThankYouPage() {
         </h1>
 
         <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-          Thank you for reaching out to MitraTech. A Senior Solutions Architect is reviewing your project details and will send a custom proposal & schedule a call within 24 hours.
+          Thank you for reaching out to MitraTech. Our team in Pune is reviewing your project details and will send a custom proposal and schedule a discovery call within 24 hours.
         </p>
 
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -33,10 +38,10 @@ export default function ThankYouPage() {
           </Link>
 
           <Link
-            href="/portfolio"
+            href="/services"
             className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs flex items-center justify-center space-x-2 transition-colors"
           >
-            <span>Explore Case Studies</span>
+            <span>Explore Services</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

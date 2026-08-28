@@ -1,9 +1,9 @@
 import React from "react";
-import Metadata from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { PRODUCTS_DATA, ProductItem } from "@/constants/productsData";
+import { PRODUCTS_DATA } from "@/constants/productsData";
 import {
   Sparkles,
   ExternalLink,
@@ -16,9 +16,7 @@ import {
   Search,
   Key,
   FileSpreadsheet,
-  Layers,
   Check,
-  Bot,
 } from "lucide-react";
 
 interface Props {
@@ -31,23 +29,30 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = PRODUCTS_DATA.find((p) => p.slug === slug);
 
   if (!product) {
     return {
-      title: "Product Not Found | MitraTech",
+      title: "Product Not Found",
     };
   }
 
+  const url = `https://www.mitratechservices.in/products/${product.slug}`;
+
   return {
-    title: `${product.name} - ${product.badge} | MitraTech Products`,
+    title: `${product.name} | MitraTech Products`,
     description: product.shortDescription,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
-      title: product.name,
+      title: `${product.name} - ${product.badge} | MitraTech`,
       description: product.shortDescription,
-      images: [{ url: product.heroImage }],
+      url: url,
+      siteName: "Mitratech Services (OPC) Pvt Ltd",
+      images: [{ url: "https://www.mitratechservices.in/og-image.png" }],
     },
   };
 }

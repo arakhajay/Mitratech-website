@@ -2,19 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
-  Sparkles,
   Mail,
   Phone,
   MapPin,
   Clock,
   Send,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Github,
   CheckCircle2,
   ExternalLink,
+  MessageCircle,
 } from "lucide-react";
 import { COMPANY_INFO } from "@/constants/companyData";
 import { SERVICES_DATA } from "@/constants/servicesData";
@@ -31,6 +28,10 @@ export function Footer() {
     setTimeout(() => setSubscribed(false), 4000);
   };
 
+  const whatsappUrl = `https://wa.me/${COMPANY_INFO.contact.whatsapp}?text=${encodeURIComponent(
+    "Hello Mitratech Services, I would like to enquire about your digital services."
+  )}`;
+
   return (
     <footer className="relative bg-slate-950 text-slate-300 pt-16 pb-12 overflow-hidden border-t border-slate-800">
       {/* Background Ambient Glowing Elements */}
@@ -39,13 +40,17 @@ export function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800/80">
-          {/* Brand Info & Newsletter */}
+          {/* Brand Info & Direct Communication */}
           <div className="lg:col-span-2 space-y-4 pr-4">
             <Link href="/" className="flex items-center space-x-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-cyan-400 p-0.5 shadow-md shadow-blue-500/20">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-cyan-400" />
-                </div>
+              <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-blue-500/20 flex items-center justify-center bg-slate-900 border border-slate-800">
+                <Image
+                  src="/logo.png"
+                  alt="MitraTech Logo"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-contain p-1"
+                />
               </div>
               <span className="text-xl font-bold font-heading text-white tracking-tight">
                 Mitra<span className="text-blue-500">Tech</span>
@@ -87,43 +92,16 @@ export function Footer() {
               )}
             </div>
 
-            {/* Social Links */}
-            <div className="flex items-center space-x-3 pt-2">
+            {/* Instant Contact Button */}
+            <div className="pt-2">
               <a
-                href={COMPANY_INFO.socials.twitter}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/30 transition-colors"
-                aria-label="Twitter profile"
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-colors"
               >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href={COMPANY_INFO.socials.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-400 hover:border-blue-500/30 transition-colors"
-                aria-label="LinkedIn page"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href={COMPANY_INFO.socials.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-400 hover:border-pink-500/30 transition-colors"
-                aria-label="Instagram profile"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={COMPANY_INFO.socials.github}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-purple-400 hover:border-purple-500/30 transition-colors"
-                aria-label="GitHub profile"
-              >
-                <Github className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
               </a>
             </div>
           </div>
@@ -145,8 +123,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:text-blue-400 transition-colors">
-                  Portfolio
+                <Link href="/services" className="hover:text-blue-400 transition-colors">
+                  Services
                 </Link>
               </li>
               <li>
@@ -155,8 +133,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-blue-400 transition-colors">
-                  Blog & Articles
+                <Link href="/faq" className="hover:text-blue-400 transition-colors">
+                  FAQs & Knowledge
                 </Link>
               </li>
               <li>
@@ -225,11 +203,15 @@ export function Footer() {
               </li>
               <li className="flex items-center space-x-2.5">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>{COMPANY_INFO.contact.phone}</span>
+                <a href={COMPANY_INFO.contact.telLink} className="hover:text-cyan-300 transition-colors">
+                  {COMPANY_INFO.contact.phone}
+                </a>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Mail className="w-4 h-4 text-purple-400 shrink-0" />
-                <span>{COMPANY_INFO.contact.email}</span>
+                <a href={`mailto:${COMPANY_INFO.contact.email}`} className="hover:text-purple-300 transition-colors">
+                  {COMPANY_INFO.contact.email}
+                </a>
               </li>
               <li className="flex items-start space-x-2.5">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />

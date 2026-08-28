@@ -35,7 +35,7 @@ export function FaqPreview() {
           </h2>
         </div>
 
-        {/* Accordion List */}
+        {/* Accordion List - Always rendered in DOM for SEO crawlers */}
         <div className="space-y-4">
           {previewFaqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
@@ -46,6 +46,7 @@ export function FaqPreview() {
               >
                 <button
                   onClick={() => toggle(idx)}
+                  aria-expanded={isOpen}
                   className="w-full p-6 text-left flex items-center justify-between space-x-4 focus:outline-none"
                 >
                   <span className="text-base sm:text-lg font-bold font-heading text-white hover:text-blue-400 transition-colors">
@@ -58,11 +59,14 @@ export function FaqPreview() {
                   />
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 pt-4 animate-fadeIn">
-                    {faq.answer}
-                  </div>
-                )}
+                {/* Always present in HTML DOM, styled with CSS for visibility */}
+                <div
+                  className={`px-6 pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 pt-4 ${
+                    isOpen ? "block" : "hidden"
+                  }`}
+                >
+                  {faq.answer}
+                </div>
               </div>
             );
           })}

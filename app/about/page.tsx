@@ -1,14 +1,31 @@
 import React from "react";
-import Metadata from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, Target, Compass, Award, ShieldCheck, Users, TrendingUp, Lightbulb, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Sparkles, Target, Compass, Award, ShieldCheck, Users, TrendingUp, Lightbulb, ArrowRight, CheckCircle2, UserCheck, MapPin } from "lucide-react";
 import { COMPANY_INFO } from "@/constants/companyData";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
-export const metadata = {
-  title: "About Us | Mitratech Services (OPC) Pvt Ltd",
-  description: "Learn about Mitratech Services (OPC) Pvt Ltd's story, mission, core values, and history of delivering enterprise web products.",
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about Mitratech Services (OPC) Pvt Ltd, our founder Ajay Arakh, mission, core principles, and digital engineering capabilities based in Pune, India.",
+  alternates: {
+    canonical: "https://www.mitratechservices.in/about",
+  },
+  openGraph: {
+    title: "About Us | MitraTech",
+    description: "Learn about Mitratech Services (OPC) Pvt Ltd, our founder Ajay Arakh, mission, and digital engineering capabilities based in Pune, India.",
+    url: "https://www.mitratechservices.in/about",
+    siteName: "Mitratech Services (OPC) Pvt Ltd",
+    images: [
+      {
+        url: "https://www.mitratechservices.in/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "About Mitratech Services (OPC) Pvt Ltd",
+      },
+    ],
+  },
 };
 
 export default function AboutPage() {
@@ -18,7 +35,7 @@ export default function AboutPage() {
       <section className="relative text-center max-w-4xl mx-auto px-4 space-y-6">
         <div className="inline-flex items-center space-x-2 text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-4 py-2 rounded-full border border-cyan-500/20">
           <Sparkles className="w-4 h-4" />
-          <span>Our Story & Mission</span>
+          <span>Our Story & Leadership</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold font-heading text-white tracking-tight">
@@ -31,32 +48,40 @@ export default function AboutPage() {
         </p>
       </section>
 
-      {/* Main Image Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="relative h-72 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
-            <Image
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-              alt="MitraTech Office Team"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-72 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
-            <Image
-              src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80"
-              alt="UI UX Design Sprint"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-72 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
-            <Image
-              src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
-              alt="Engineering & Code Review"
-              fill
-              className="object-cover"
-            />
+      {/* Leadership / Founder Profile */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-8 sm:p-12 rounded-3xl glass-panel border border-slate-800 shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-4 flex flex-col items-center text-center">
+              <div className="w-28 h-28 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 p-1 shadow-xl flex items-center justify-center">
+                <div className="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center text-cyan-400">
+                  <UserCheck className="w-14 h-14" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold font-heading text-white mt-4">{COMPANY_INFO.founder}</h3>
+              <p className="text-xs text-cyan-400 font-semibold">{COMPANY_INFO.founderRole}</p>
+              <div className="flex items-center space-x-1 text-slate-400 text-xs mt-2">
+                <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                <span>Pune, Maharashtra, India</span>
+              </div>
+            </div>
+
+            <div className="md:col-span-8 space-y-4">
+              <h4 className="text-lg font-bold font-heading text-white">Leadership Commitment</h4>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Under the technical direction of Ajay Arakh, Mitratech Services (OPC) Pvt Ltd is structured around engineering integrity, transparent client partnerships, and measurable performance standards. We eliminate unnecessary agency layers to deliver direct access to experienced developers and UI/UX designers.
+              </p>
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                  <span className="font-bold text-white block">Registered OPC Entity</span>
+                  <span className="text-slate-400 text-[11px]">Govt. of India Recognized</span>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                  <span className="font-bold text-white block">Direct Technical SLA</span>
+                  <span className="text-slate-400 text-[11px]">24/7 Dedicated Support</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -81,11 +106,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Company History Timeline */}
+      {/* Company Evolution Timeline */}
       <section className="max-w-5xl mx-auto px-4 space-y-12 bg-slate-950/40 py-16 rounded-3xl border border-slate-800/80">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold font-heading text-white">Our Journey</h2>
-          <p className="text-slate-400 text-sm">Key milestones in our evolution as an enterprise digital studio.</p>
+          <p className="text-slate-400 text-sm">Key milestones in our evolution as an enterprise digital engineering studio.</p>
         </div>
 
         <div className="space-y-6">

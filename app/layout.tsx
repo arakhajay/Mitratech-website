@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -20,38 +21,50 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.mitratechservices.in"),
   title: {
     default: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
-    template: "%s | Mitratech Services (OPC) Pvt Ltd",
+    template: "%s | MitraTech",
   },
   description:
-    "Mitratech Services (OPC) Pvt Ltd is a premium software development and digital marketing agency specializing in custom website design, Next.js web applications, SaaS platforms, branding, and Google Ads PPC growth.",
+    "Mitratech Services (OPC) Pvt Ltd is a premier software development and digital marketing agency based in Pune, India. Specializing in custom website design, Next.js web applications, SaaS platforms, branding, and Google Ads PPC growth.",
   keywords: [
-    "Software Development Agency",
-    "Website Design Studio",
-    "Next.js Developers",
-    "Web Application Agency",
-    "SaaS Development",
-    "Google Ads PPC Agency",
-    "Branding & Graphic Design",
     "MitraTech",
     "Mitratech Services",
+    "Mitratech Services (OPC) Pvt Ltd",
+    "Software Development Agency Pune",
+    "Website Design Studio Pune",
+    "Next.js Developers India",
+    "Web Application Development",
+    "SaaS Platform Development",
+    "Google Ads PPC Agency India",
+    "UI UX Design Studio",
   ],
-  authors: [{ name: "Mitratech Services (OPC) Pvt Ltd" }],
+  authors: [{ name: "Mitratech Services (OPC) Pvt Ltd", url: "https://www.mitratechservices.in" }],
+  creator: "Mitratech Services (OPC) Pvt Ltd",
+  publisher: "Mitratech Services (OPC) Pvt Ltd",
+  alternates: {
+    canonical: "https://www.mitratechservices.in/",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://mitratechservices.in",
+    locale: "en_IN",
+    url: "https://www.mitratechservices.in/",
     siteName: "Mitratech Services (OPC) Pvt Ltd",
     title: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
     description:
-      "Enterprise-grade website design, full-stack web applications, SaaS engineering, and high-ROI digital marketing.",
+      "Enterprise-grade website design, full-stack Next.js web applications, SaaS engineering, and high-ROI digital marketing from Pune, India.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+        url: "https://www.mitratechservices.in/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Mitratech Services Enterprise Digital Agency",
+        alt: "MitraTech Enterprise Digital Agency",
       },
     ],
   },
@@ -59,7 +72,18 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "MitraTech | Enterprise Digital Products & Web Development",
     description: "Building digital experiences that grow businesses worldwide.",
-    images: ["https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"],
+    images: ["https://www.mitratechservices.in/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -70,9 +94,10 @@ export default function RootLayout({
 }>) {
   const orgSchema = getOrganizationSchema();
   const localSchema = getLocalBusinessSchema();
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="en-IN" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -84,6 +109,22 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#0F172A] text-[#F8FAFC] antialiased selection:bg-blue-600 selection:text-white">
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        )}
         <Navbar />
         <main className="pt-20 min-h-screen">{children}</main>
         <Footer />

@@ -1,8 +1,9 @@
 import React from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Sparkles, CheckCircle2, ArrowRight, Layers, ShieldCheck, Zap } from "lucide-react";
+import { Sparkles, CheckCircle2, ArrowRight, Zap } from "lucide-react";
 import { SERVICES_DATA } from "@/constants/servicesData";
 import { getServiceSchema, getFAQSchema } from "@/lib/jsonld";
 import { CtaBanner } from "@/components/home/CtaBanner";
@@ -17,14 +18,33 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = SERVICES_DATA.find((s) => s.slug === slug);
   if (!service) return { title: "Service Not Found" };
 
+  const url = `https://www.mitratechservices.in/services/${service.slug}`;
+
   return {
-    title: `${service.title} Services | MitraTech Agency`,
+    title: `${service.title} Services`,
     description: service.shortDescription,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${service.title} | MitraTech`,
+      description: service.shortDescription,
+      url: url,
+      siteName: "Mitratech Services (OPC) Pvt Ltd",
+      images: [
+        {
+          url: "https://www.mitratechservices.in/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${service.title} - MitraTech`,
+        },
+      ],
+    },
   };
 }
 

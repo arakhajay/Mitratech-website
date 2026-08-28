@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu,
@@ -14,7 +15,6 @@ import {
   PenTool,
   Target,
   ArrowRight,
-  Sparkles,
   Bot,
   Search,
   ExternalLink,
@@ -58,9 +58,8 @@ export function Navbar() {
     { name: "About", href: "/about" },
     { name: "Services", href: "/services", hasDropdown: "services" },
     { name: "Products", href: "/products", hasDropdown: "products" },
-    { name: "Portfolio", href: "/portfolio" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Blog", href: "/blog" },
+    { name: "FAQ", href: "/faq" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -74,12 +73,17 @@ export function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo - MitraTech without Digital Solutions */}
+          {/* Logo with official logo.png */}
           <Link href="/" className="flex items-center space-x-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-cyan-400 p-0.5 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform" />
-              </div>
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform flex items-center justify-center bg-slate-900 border border-slate-800">
+              <Image
+                src="/logo.png"
+                alt="MitraTech Logo"
+                width={40}
+                height={40}
+                priority
+                className="w-full h-full object-contain p-1"
+              />
             </div>
             <div className="flex flex-col">
               <span className="text-2xl font-bold font-heading text-white tracking-tight">
@@ -101,8 +105,8 @@ export function Navbar() {
                     onMouseEnter={() => setActiveDropdown("services")}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    <button
-                      onClick={() => setActiveDropdown(activeDropdown === "services" ? null : "services")}
+                    <Link
+                      href="/services"
                       className={`flex items-center space-x-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                         pathname.startsWith("/services")
                           ? "text-blue-400 bg-blue-500/10"
@@ -115,7 +119,7 @@ export function Navbar() {
                           activeDropdown === "services" ? "rotate-180 text-blue-400" : ""
                         }`}
                       />
-                    </button>
+                    </Link>
 
                     {/* Services Mega Menu Dropdown */}
                     {activeDropdown === "services" && (
@@ -157,8 +161,8 @@ export function Navbar() {
                     onMouseEnter={() => setActiveDropdown("products")}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    <button
-                      onClick={() => setActiveDropdown(activeDropdown === "products" ? null : "products")}
+                    <Link
+                      href="/products"
                       className={`flex items-center space-x-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                         pathname.startsWith("/products")
                           ? "text-blue-400 bg-blue-500/10"
@@ -174,7 +178,7 @@ export function Navbar() {
                           activeDropdown === "products" ? "rotate-180 text-blue-400" : ""
                         }`}
                       />
-                    </button>
+                    </Link>
 
                     {/* Products Mega Menu Dropdown */}
                     {activeDropdown === "products" && (
@@ -263,12 +267,12 @@ export function Navbar() {
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center space-x-3">
-            <button
-              onClick={() => setIsModalOpen(true)}
+            <Link
+              href="/contact"
               className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-xs font-semibold shadow-lg shadow-blue-500/20 transition-all transform hover:scale-105 active:scale-95"
             >
               Get Free Quote
-            </button>
+            </Link>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -338,15 +342,13 @@ export function Navbar() {
               ))}
 
               <div className="pt-4 border-t border-slate-800">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsModalOpen(true);
-                  }}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow-md"
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-center w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow-md"
                 >
                   Get Free Consultation
-                </button>
+                </Link>
               </div>
             </div>
           </div>
