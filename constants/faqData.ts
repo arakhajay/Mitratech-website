@@ -11,7 +11,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: "faq-2",
     category: "General",
     question: "Where is MitraTech located and do you work with international clients?",
-    answer: "Our headquarters are in Bengaluru, India, but over 60% of our clients are located across North America, Europe, Australia, and the UAE. We operate smoothly across global time zones via Slack, Zoom, and Notion.",
+    answer: "Our headquarters are in Pune, India, but over 60% of our clients are located across North America, Europe, Australia, and the UAE. We operate smoothly across global time zones via Slack, Zoom, and Notion.",
   },
   {
     id: "faq-3",

@@ -7,8 +7,16 @@ import { COMPANY_INFO } from "@/constants/companyData";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
 export const metadata = {
-  title: "About Us | Mitratech Services (OPC) Pvt Ltd",
+  title: "About Us",
   description: "Learn about Mitratech Services (OPC) Pvt Ltd's story, mission, core values, and history of delivering enterprise web products.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    url: "/about",
+    title: "About Us | Mitratech Services (OPC) Pvt Ltd",
+    description: "Learn about Mitratech Services (OPC) Pvt Ltd's story, mission, core values, and history of delivering enterprise web products.",
+  },
 };
 
 export default function AboutPage() {

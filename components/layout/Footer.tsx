@@ -86,46 +86,6 @@ export function Footer() {
                 </form>
               )}
             </div>
-
-            {/* Social Links */}
-            <div className="flex items-center space-x-3 pt-2">
-              <a
-                href={COMPANY_INFO.socials.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/30 transition-colors"
-                aria-label="Twitter profile"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href={COMPANY_INFO.socials.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-400 hover:border-blue-500/30 transition-colors"
-                aria-label="LinkedIn page"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href={COMPANY_INFO.socials.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-400 hover:border-pink-500/30 transition-colors"
-                aria-label="Instagram profile"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={COMPANY_INFO.socials.github}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-purple-400 hover:border-purple-500/30 transition-colors"
-                aria-label="GitHub profile"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}

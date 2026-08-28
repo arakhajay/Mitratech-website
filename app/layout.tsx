@@ -20,6 +20,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.mitratechservices.in"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
     template: "%s | Mitratech Services (OPC) Pvt Ltd",
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   authors: [{ name: "Mitratech Services (OPC) Pvt Ltd" }],
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://mitratechservices.in",
+    locale: "en_IN",
+    url: "https://www.mitratechservices.in/",
     siteName: "Mitratech Services (OPC) Pvt Ltd",
     title: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
     description:
@@ -70,10 +74,40 @@ export default function RootLayout({
 }>) {
   const orgSchema = getOrganizationSchema();
   const localSchema = getLocalBusinessSchema();
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   return (
-    <html lang="en" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="en-IN" className={`dark ${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
+        {gaId && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}');
+                `,
+              }}
+            />
+          </>
+        )}
+        {gtmId && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${gtmId}');
+              `,
+            }}
+          />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -84,6 +118,16 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#0F172A] text-[#F8FAFC] antialiased selection:bg-blue-600 selection:text-white">
+        {gtmId && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <Navbar />
         <main className="pt-20 min-h-screen">{children}</main>
         <Footer />

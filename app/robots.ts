@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/thank-you"],
     },
-    sitemap: "https://mitratech.com/sitemap.xml",
+    sitemap: "https://www.mitratechservices.in/sitemap.xml",
   };
 }
