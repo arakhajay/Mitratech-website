@@ -5,6 +5,10 @@ import { CheckCircle2, ArrowRight, Home } from "lucide-react";
 export const metadata = {
   title: "Thank You | MitraTech Digital Agency",
   description: "Thank you for contacting MitraTech. Our technical team will reach out to you within 24 hours.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function ThankYouPage() {

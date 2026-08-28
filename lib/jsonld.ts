@@ -3,8 +3,8 @@ export function getOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Mitratech Services (OPC) Pvt Ltd",
-    "url": "https://mitratechservices.in",
-    "logo": "https://mitratechservices.in/logo.png",
+    "url": "https://www.mitratechservices.in/",
+    "logo": "https://www.mitratechservices.in/logo.svg",
     "description": "Transforming Ideas into Powerful Digital Solutions. Premium web design, web development, SaaS web apps, branding, and digital growth agency.",
     "address": {
       "@type": "PostalAddress",
@@ -21,12 +21,7 @@ export function getOrganizationSchema() {
       "contactType": "Customer Support",
       "areaServed": "Worldwide",
       "availableLanguage": ["English"]
-    },
-    "sameAs": [
-      "https://twitter.com/mitratech",
-      "https://linkedin.com/company/mitratech",
-      "https://instagram.com/mitratech"
-    ]
+    }
   };
 }
 
@@ -36,7 +31,6 @@ export function getLocalBusinessSchema() {
     "@type": "ProfessionalService",
     "name": "Mitratech Services (OPC) Pvt Ltd",
     "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
-    "priceRange": "$$$",
     "telephone": "+91-9579852657",
     "email": "support@mitratechservices.in",
     "address": {

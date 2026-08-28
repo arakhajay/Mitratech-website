@@ -40,7 +40,7 @@ export function CtaBanner() {
               </button>
 
               <a
-                href={`tel:${COMPANY_INFO.contact.phone}`}
+                href={COMPANY_INFO.contact.phoneLink}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white font-semibold text-sm flex items-center justify-center space-x-2 transition-all"
               >
                 <PhoneCall className="w-4 h-4 text-emerald-400" />

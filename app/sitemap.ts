@@ -5,10 +5,10 @@ import { PORTFOLIO_DATA } from "@/constants/portfolioData";
 import { BLOG_POSTS } from "@/constants/blogData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mitratechservices.in";
+  const baseUrl = "https://www.mitratechservices.in";
 
   const staticPages = [
-    "",
+    "/",
     "/about",
     "/services",
     "/products",
@@ -20,10 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/terms",
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: route === "/" ? `${baseUrl}/` : `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    priority: route === "/" ? 1.0 : 0.8,
   }));
 
   const servicePages = SERVICES_DATA.map((srv) => ({

@@ -9,6 +9,12 @@ export const metadata = {
   title: "Proprietary SaaS Products & AI Platforms | MitraTech",
   description:
     "Explore MitraTech's suite of proprietary AI chatbots, lead scraping engines, and SaaS products including Zivox Agent and LeadSpark AI.",
+  alternates: {
+    canonical: "/products",
+  },
+  openGraph: {
+    url: "/products",
+  },
 };
 
 const iconMap: Record<string, React.ReactNode> = {

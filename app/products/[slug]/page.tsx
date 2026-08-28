@@ -38,13 +38,23 @@ export async function generateMetadata({ params }: Props) {
   if (!product) {
     return {
       title: "Product Not Found | MitraTech",
+      alternates: {
+        canonical: `/products/${slug}`,
+      },
+      openGraph: {
+        url: `/products/${slug}`,
+      },
     };
   }
 
   return {
     title: `${product.name} - ${product.badge} | MitraTech Products`,
     description: product.shortDescription,
+    alternates: {
+      canonical: `/products/${slug}`,
+    },
     openGraph: {
+      url: `/products/${slug}`,
       title: product.name,
       description: product.shortDescription,
       images: [{ url: product.heroImage }],

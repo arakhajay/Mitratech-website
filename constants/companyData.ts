@@ -17,15 +17,10 @@ export const COMPANY_INFO = {
   contact: {
     email: "support@mitratechservices.in",
     phone: "+91 9579852657",
+    phoneLink: "tel:+919579852657",
     whatsapp: "919579852657",
     address: "Handewadi, Hadapsar, Pune, Maharashtra 411028",
     hours: "Mon - Sat: 9:00 AM - 7:00 PM IST",
-  },
-  socials: {
-    twitter: "https://twitter.com/mitratech",
-    linkedin: "https://linkedin.com/company/mitratech",
-    instagram: "https://instagram.com/mitratech",
-    github: "https://github.com/mitratech",
   },
   values: [
     {

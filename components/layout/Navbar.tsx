@@ -101,8 +101,8 @@ export function Navbar() {
                     onMouseEnter={() => setActiveDropdown("services")}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    <button
-                      onClick={() => setActiveDropdown(activeDropdown === "services" ? null : "services")}
+                    <Link
+                      href="/services"
                       className={`flex items-center space-x-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                         pathname.startsWith("/services")
                           ? "text-blue-400 bg-blue-500/10"
@@ -115,7 +115,7 @@ export function Navbar() {
                           activeDropdown === "services" ? "rotate-180 text-blue-400" : ""
                         }`}
                       />
-                    </button>
+                    </Link>
 
                     {/* Services Mega Menu Dropdown */}
                     {activeDropdown === "services" && (
@@ -157,8 +157,8 @@ export function Navbar() {
                     onMouseEnter={() => setActiveDropdown("products")}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    <button
-                      onClick={() => setActiveDropdown(activeDropdown === "products" ? null : "products")}
+                    <Link
+                      href="/products"
                       className={`flex items-center space-x-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
                         pathname.startsWith("/products")
                           ? "text-blue-400 bg-blue-500/10"
@@ -174,7 +174,7 @@ export function Navbar() {
                           activeDropdown === "products" ? "rotate-180 text-blue-400" : ""
                         }`}
                       />
-                    </button>
+                    </Link>
 
                     {/* Products Mega Menu Dropdown */}
                     {activeDropdown === "products" && (
@@ -263,12 +263,12 @@ export function Navbar() {
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center space-x-3">
-            <button
-              onClick={() => setIsModalOpen(true)}
+            <Link
+              href="/contact"
               className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-xs font-semibold shadow-lg shadow-blue-500/20 transition-all transform hover:scale-105 active:scale-95"
             >
               Get Free Quote
-            </button>
+            </Link>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -338,15 +338,13 @@ export function Navbar() {
               ))}
 
               <div className="pt-4 border-t border-slate-800">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsModalOpen(true);
-                  }}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow-md"
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow-md block text-center"
                 >
                   Get Free Consultation
-                </button>
+                </Link>
               </div>
             </div>
           </div>
