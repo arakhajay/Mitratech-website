@@ -9,10 +9,6 @@ import {
   MapPin,
   Clock,
   Send,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Github,
   CheckCircle2,
   ExternalLink,
 } from "lucide-react";

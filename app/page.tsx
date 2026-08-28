@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { ClientMarquee } from "@/components/home/ClientMarquee";
 import { AboutPreview } from "@/components/home/AboutPreview";
@@ -8,6 +9,15 @@ import { ProcessTimeline } from "@/components/home/ProcessTimeline";
 import { TestimonialsCarousel } from "@/components/home/TestimonialsCarousel";
 import { FaqPreview } from "@/components/home/FaqPreview";
 import { CtaBanner } from "@/components/home/CtaBanner";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    url: "/",
+  },
+};
 
 export default function HomePage() {
   return (

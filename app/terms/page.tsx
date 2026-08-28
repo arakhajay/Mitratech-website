@@ -3,6 +3,12 @@ import React from "react";
 export const metadata = {
   title: "Terms & Conditions | MitraTech",
   description: "MitraTech's Terms and Conditions governing website usage and client service agreements.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    url: "/terms",
+  },
 };
 
 export default function TermsPage() {

@@ -3,6 +3,12 @@ import React from "react";
 export const metadata = {
   title: "Privacy Policy | MitraTech",
   description: "MitraTech's Privacy Policy outlining data collection, usage, and security practices.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    url: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {

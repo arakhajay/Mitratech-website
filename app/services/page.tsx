@@ -7,6 +7,12 @@ import { CtaBanner } from "@/components/home/CtaBanner";
 export const metadata = {
   title: "Core Services | MitraTech Digital Agency",
   description: "Explore MitraTech's 6 core services: Website Design, Website Development, Web Application Development, Social Media Marketing, Graphic Design, and Google Ads.",
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    url: "/services",
+  },
 };
 
 const iconMap: Record<string, React.ReactNode> = {

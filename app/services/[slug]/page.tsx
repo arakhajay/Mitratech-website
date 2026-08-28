@@ -25,6 +25,12 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${service.title} Services | MitraTech Agency`,
     description: service.shortDescription,
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
+    openGraph: {
+      url: `/services/${slug}`,
+    },
   };
 }
 

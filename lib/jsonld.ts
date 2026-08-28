@@ -31,7 +31,6 @@ export function getLocalBusinessSchema() {
     "@type": "ProfessionalService",
     "name": "Mitratech Services (OPC) Pvt Ltd",
     "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
-    "priceRange": "$$$",
     "telephone": "+91-9579852657",
     "email": "support@mitratechservices.in",
     "address": {

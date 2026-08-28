@@ -93,11 +93,13 @@ export default function FAQPage() {
                 />
               </button>
 
-              {isOpen && (
-                <div className="px-6 pb-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 pt-4 animate-fadeIn">
-                  {faq.answer}
-                </div>
-              )}
+              <div 
+                className={`px-6 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 overflow-hidden transition-all duration-300 ${
+                  isOpen ? 'pb-6 pt-4 max-h-96 opacity-100' : 'max-h-0 pt-0 pb-0 opacity-0'
+                }`}
+              >
+                {faq.answer}
+              </div>
             </div>
           );
         })}

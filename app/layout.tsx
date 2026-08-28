@@ -21,9 +21,6 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mitratechservices.in"),
-  alternates: {
-    canonical: "/",
-  },
   title: {
     default: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
     template: "%s | Mitratech Services (OPC) Pvt Ltd",
@@ -45,7 +42,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://www.mitratechservices.in/",
     siteName: "Mitratech Services (OPC) Pvt Ltd",
     title: "MitraTech | Transforming Ideas into Powerful Digital Solutions",
     description:
