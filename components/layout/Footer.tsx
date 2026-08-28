@@ -42,19 +42,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800/80">
           {/* Brand Info & Direct Communication */}
           <div className="lg:col-span-2 space-y-4 pr-4">
-            <Link href="/" className="flex items-center space-x-2.5">
-              <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shadow-blue-500/20 flex items-center justify-center bg-slate-900 border border-slate-800">
+            <Link href="/" className="inline-flex items-center group" aria-label="MitraTech Home">
+              <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-md shadow-blue-500/10 group-hover:scale-105 transition-transform flex items-center justify-center">
                 <Image
                   src="/logo.png"
-                  alt="MitraTech Logo"
-                  width={36}
-                  height={36}
-                  className="w-full h-full object-contain p-1"
+                  alt="MitraTech"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-xl font-bold font-heading text-white tracking-tight">
-                Mitra<span className="text-blue-500">Tech</span>
-              </span>
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
