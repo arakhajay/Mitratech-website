@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar, User, Tag, Sparkles } from "lucide-react";
 import { BLOG_POSTS } from "@/constants/blogData";
+import { getArticleSchema } from "@/lib/jsonld";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
 interface Props {
@@ -21,14 +22,29 @@ export async function generateMetadata({ params }: Props) {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return { title: "Post Not Found" };
 
+  const url = `https://www.mitratechservices.in/blog/${slug}`;
+
   return {
     title: `${post.title} | MitraTech Blog`,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: url,
     },
     openGraph: {
-      url: `/blog/${slug}`,
+      title: `${post.title} | MitraTech`,
+      description: post.excerpt,
+      url: url,
+      type: "article",
+      publishedTime: post.publishedAt,
+      authors: [post.author.name],
+      images: [
+        {
+          url: post.coverImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
   };
 }
@@ -41,8 +57,14 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  const articleSchema = getArticleSchema(post);
+
   return (
     <div className="space-y-12 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <article className="max-w-4xl mx-auto px-4 space-y-8">
         <Link
           href="/blog"

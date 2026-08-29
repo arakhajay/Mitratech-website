@@ -11,7 +11,7 @@ export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "Development", "Design", "Marketing"];
+  const categories = ["All", "AI & Products", "Development", "Design", "Marketing"];
 
   const filteredPosts = BLOG_POSTS.filter((post) => {
     const matchesCategory = activeCategory === "All" || post.category === activeCategory;

@@ -113,3 +113,41 @@ export function getBreadcrumbSchema(items: { name: string; url: string }[]) {
     })),
   };
 }
+
+export function getArticleSchema(post: {
+  title: string;
+  excerpt: string;
+  slug: string;
+  coverImage: string;
+  publishedAt: string;
+  author: { name: string; role: string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": [post.coverImage],
+    "datePublished": post.publishedAt,
+    "dateModified": post.publishedAt,
+    "author": {
+      "@type": "Person",
+      "name": post.author.name,
+      "jobTitle": post.author.role,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Mitratech Services (OPC) Pvt Ltd",
+      "url": "https://www.mitratechservices.in/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.mitratechservices.in/logo.png",
+      },
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.mitratechservices.in/blog/${post.slug}`,
+    },
+  };
+}
+
