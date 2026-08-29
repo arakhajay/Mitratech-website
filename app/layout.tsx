@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "w5tS8wRo1WVM3Jt0RuG4mCaoOuG1yFXI_cZj4zBTRCs",
   },
   openGraph: {
     type: "website",
