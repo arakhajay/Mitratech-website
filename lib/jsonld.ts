@@ -3,10 +3,11 @@ export function getOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Mitratech Services (OPC) Pvt Ltd",
+    "alternateName": "MitraTech",
     "legalName": "Mitratech Services (OPC) Pvt Ltd",
     "url": "https://www.mitratechservices.in/",
     "logo": "https://www.mitratechservices.in/logo.png",
-    "description": "Transforming Ideas into Powerful Digital Solutions. Premium web design, Next.js web applications, SaaS products, branding, and digital growth agency based in Pune, India.",
+    "description": "Transforming Ideas into Powerful Digital Solutions. Premium website design, Next.js web applications, SaaS products, branding, and Google Ads PPC agency based in Pune, India.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Handewadi, Hadapsar",
@@ -27,7 +28,16 @@ export function getOrganizationSchema() {
       "@type": "Person",
       "name": "Ajay Arakh",
       "jobTitle": "Founder & Director"
-    }
+    },
+    "knowsAbout": [
+      "Next.js Development",
+      "Full-Stack Web Applications",
+      "Custom SaaS Engineering",
+      "UI/UX Design & Glassmorphism",
+      "Google Ads PPC Lead Generation",
+      "AI Chatbot Automation (Zivox Agent)",
+      "B2B Lead Scraping (LeadSpark AI)"
+    ]
   };
 }
 
@@ -36,6 +46,7 @@ export function getLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Mitratech Services (OPC) Pvt Ltd",
+    "alternateName": "MitraTech Pune",
     "image": "https://www.mitratechservices.in/og-image.png",
     "url": "https://www.mitratechservices.in/",
     "logo": "https://www.mitratechservices.in/logo.png",
@@ -67,6 +78,64 @@ export function getLocalBusinessSchema() {
       ],
       "opens": "09:00",
       "closes": "19:00"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Pune"
+      },
+      {
+        "@type": "Country",
+        "name": "India"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "MitraTech Software & Marketing Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Website Design"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Next.js Website Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Web Application & SaaS Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Google Ads PPC Growth Management"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Zivox Agent AI Chatbot"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "LeadSpark AI Scraper"
+          }
+        }
+      ]
     }
   };
 }
