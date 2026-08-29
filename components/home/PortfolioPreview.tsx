@@ -9,6 +9,10 @@ import { PORTFOLIO_DATA } from "@/constants/portfolioData";
 export function PortfolioPreview() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
+  if (!PORTFOLIO_DATA || PORTFOLIO_DATA.length === 0) {
+    return null;
+  }
+
   const categories = ["All", "Web Apps", "E-Commerce", "Website Design", "Branding"];
 
   const filteredProjects = (
