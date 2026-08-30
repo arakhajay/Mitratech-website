@@ -75,7 +75,7 @@ export default function PrivacyPage() {
           <p>Attn: Privacy & Grievance Officer</p>
           <p>Handewadi, Hadapsar, Pune, Maharashtra 411028, India</p>
           <p>Email: <a href="mailto:support@mitratechservices.in" className="text-cyan-400 hover:underline">support@mitratechservices.in</a></p>
-          <p>Phone: +91 9579852657</p>
+          <p>Phone: +91 8600352657</p>
         </div>
       </div>
     </div>

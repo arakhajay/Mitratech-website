@@ -18,7 +18,7 @@ export function getOrganizationSchema() {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+919579852657",
+      "telephone": "+918600352657",
       "email": "support@mitratechservices.in",
       "contactType": "Customer Support",
       "areaServed": ["IN", "US", "GB", "AE", "AU", "Worldwide"],
@@ -51,7 +51,7 @@ export function getLocalBusinessSchema() {
     "url": "https://www.mitratechservices.in/",
     "logo": "https://www.mitratechservices.in/logo.png",
     "priceRange": "₹₹",
-    "telephone": "+919579852657",
+    "telephone": "+918600352657",
     "email": "support@mitratechservices.in",
     "address": {
       "@type": "PostalAddress",

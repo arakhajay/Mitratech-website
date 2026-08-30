@@ -223,7 +223,7 @@ export function ContactContent() {
                     <input
                       {...register("phone")}
                       type="tel"
-                      placeholder="+91 9579852657"
+                      placeholder="+91 8600352657"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
                     />
                     {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}

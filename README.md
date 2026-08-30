@@ -56,5 +56,5 @@ MitraTech is a production-ready, enterprise-grade digital agency web application
 ## 📍 Contact Information
 
 - **Location**: Handewadi, Hadapsar, Pune, Maharashtra 411028
-- **Contact No**: +91 9579852657
-- **Email**: hello@mitratech.com
+- **Contact No**: +91 8600352657
+- **Email**: support@mitratechservices.in

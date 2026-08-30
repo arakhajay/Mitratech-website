@@ -16,9 +16,9 @@ export const COMPANY_INFO = {
   ],
   contact: {
     email: "support@mitratechservices.in",
-    phone: "+91 9579852657",
-    telLink: "tel:+919579852657",
-    whatsapp: "919579852657",
+    phone: "+91 8600352657",
+    telLink: "tel:+918600352657",
+    whatsapp: "918600352657",
     address: "Handewadi, Hadapsar, Pune, Maharashtra 411028",
     city: "Pune",
     state: "Maharashtra",

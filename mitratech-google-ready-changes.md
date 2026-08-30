@@ -162,7 +162,7 @@ These are `<button>`s, not links. Make them `<a href>`:
 - Products → `/products`
 - Get Free Quote / Get Free Consultation → `/contact`
 
-Tel is `tel:+91 9579852657` (space). Use `tel:+919579852657`.
+Tel is `tel:+91 8600352657` (space). Use `tel:+918600352657`.
 
 ---
 

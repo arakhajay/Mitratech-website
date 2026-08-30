@@ -5,7 +5,7 @@ import { ContactContent } from "@/components/contact/ContactContent";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Mitratech Services (OPC) Pvt Ltd in Pune, India. Contact us via email at support@mitratechservices.in or call +91 9579852657 for project discovery.",
+    "Get in touch with Mitratech Services (OPC) Pvt Ltd in Pune, India. Contact us via email at support@mitratechservices.in or call +91 8600352657 for project discovery.",
   alternates: {
     canonical: "https://www.mitratechservices.in/contact",
   },
