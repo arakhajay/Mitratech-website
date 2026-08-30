@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { PRODUCTS_DATA } from "@/constants/productsData";
+import { BLOG_POSTS } from "@/constants/blogData";
+import { getBreadcrumbSchema } from "@/lib/jsonld";
 import {
   Sparkles,
   ExternalLink,
@@ -76,6 +78,12 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "https://www.mitratechservices.in/" },
+    { name: "Products", url: "https://www.mitratechservices.in/products" },
+    { name: product.name, url: `https://www.mitratechservices.in/products/${product.slug}` },
+  ]);
+
   // JSON-LD Schema for SoftwareApplication
   const jsonLd = {
     "@context": "https://schema.org",
@@ -92,8 +100,16 @@ export default async function ProductDetailPage({ params }: Props) {
     url: product.externalUrl,
   };
 
+  const relatedBlog = BLOG_POSTS.find(
+    (b) => b.slug.includes(slug) || (slug === "zivox-agent" && b.slug.includes("zivox")) || (slug === "leadspark" && b.slug.includes("leadspark"))
+  ) || BLOG_POSTS[0];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -317,6 +333,33 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          {/* Hub-and-Spoke: Related In-Depth Guide */}
+          <div className="p-8 rounded-3xl glass-panel border border-slate-800 space-y-4">
+            <div className="flex items-center space-x-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
+              <Sparkles className="w-4 h-4" />
+              <span>Product Architecture & Strategy Guide</span>
+            </div>
+
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <h3 className="text-xl font-bold font-heading text-white">
+                  {relatedBlog.title}
+                </h3>
+                <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
+                  {relatedBlog.excerpt}
+                </p>
+              </div>
+
+              <Link
+                href={`/blog/${relatedBlog.slug}`}
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-cyan-300 border border-blue-500/30 text-xs font-bold shrink-0 transition-colors"
+              >
+                <span>Read Full Blueprint</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
 
           {/* Bottom Launch Banner */}
           <div className="p-10 rounded-3xl bg-gradient-to-r from-blue-950 via-slate-900 to-purple-950 border border-blue-500/40 text-center space-y-6 shadow-2xl relative overflow-hidden">

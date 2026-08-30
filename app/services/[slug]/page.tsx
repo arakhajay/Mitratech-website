@@ -5,7 +5,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Sparkles, CheckCircle2, ArrowRight, Zap } from "lucide-react";
 import { SERVICES_DATA } from "@/constants/servicesData";
-import { getServiceSchema, getFAQSchema } from "@/lib/jsonld";
+import { BLOG_POSTS } from "@/constants/blogData";
+import { getServiceSchema, getFAQSchema, getBreadcrumbSchema } from "@/lib/jsonld";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
 interface Props {
@@ -58,9 +59,21 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   const serviceSchema = getServiceSchema(service.title, service.fullDescription);
   const faqSchema = getFAQSchema(service.faqs);
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "https://www.mitratechservices.in/" },
+    { name: "Services", url: "https://www.mitratechservices.in/services" },
+    { name: service.title, url: `https://www.mitratechservices.in/services/${service.slug}` },
+  ]);
+
+  // Match relevant blog articles for topical hub-and-spoke linking
+  const relatedBlogs = BLOG_POSTS.slice(0, 3);
 
   return (
     <div className="space-y-20 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -190,6 +203,46 @@ export default async function ServiceDetailPage({ params }: Props) {
               <h3 className="text-base font-bold text-white">{faq.question}</h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{faq.answer}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Hub-and-Spoke: Related Insights & Deep-Dive Guides */}
+      <section className="max-w-6xl mx-auto px-4 space-y-6">
+        <div className="text-center space-y-2">
+          <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider">Topical Authority</div>
+          <h2 className="text-2xl sm:text-3xl font-bold font-heading text-white">
+            Related Insights & Engineering Guides
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+          {relatedBlogs.map((blog) => (
+            <Link
+              key={blog.id}
+              href={`/blog/${blog.slug}`}
+              className="group p-5 rounded-2xl glass-panel border border-slate-800 hover:border-blue-500/50 transition-all flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <span className="text-[11px] font-semibold text-cyan-300 uppercase tracking-wider">
+                  {blog.category}
+                </span>
+                <h3 className="text-base font-bold font-heading text-white group-hover:text-blue-400 transition-colors">
+                  {blog.title}
+                </h3>
+                <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                  {blog.excerpt}
+                </p>
+              </div>
+
+              <div className="pt-4 flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 mt-4">
+                <span>{blog.readTime}</span>
+                <span className="text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform flex items-center space-x-1">
+                  <span>Read Guide</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </section>

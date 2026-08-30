@@ -220,3 +220,32 @@ export function getArticleSchema(post: {
   };
 }
 
+export function getSoftwareApplicationSchema(product: {
+  name: string;
+  shortDescription: string;
+  slug: string;
+  heroImage: string;
+  externalUrl: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": product.name,
+    "description": product.shortDescription,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web, Cloud",
+    "image": product.heroImage,
+    "url": `https://www.mitratechservices.in/products/${product.slug}`,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "seller": {
+        "@type": "Organization",
+        "name": "Mitratech Services (OPC) Pvt Ltd",
+      },
+    },
+  };
+}
+
+
