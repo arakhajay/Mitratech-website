@@ -101,7 +101,7 @@ export default function RootLayout({
 }>) {
   const orgSchema = getOrganizationSchema();
   const localSchema = getLocalBusinessSchema();
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-DN4L9087RE";
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   return (
