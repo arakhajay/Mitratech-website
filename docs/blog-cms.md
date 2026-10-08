@@ -4,11 +4,11 @@ This guide will help you set up Sanity CMS to manage blog posts on www.mitratech
 
 ## Overview
 
-The blog now uses **Sanity** as a headless CMS, allowing you to add, edit, and publish blog posts without touching code. You'll manage content through Sanity's hosted Studio at [sanity.io/manage](https://www.sanity.io/manage), which provides a secure, professional content management interface.
+The blog now uses **Sanity** as a headless CMS, allowing you to add, edit, and publish blog posts without touching code. You'll manage content through a dedicated Sanity Studio deployed at a custom `*.sanity.studio` URL (e.g., `https://mitratech-blog.sanity.studio`).
 
 ## Features
 
-- ✅ Sanity hosted Studio for managing posts (accessed at sanity.io/manage)
+- ✅ Dedicated Sanity Studio at your own `*.sanity.studio` URL
 - ✅ Safe fallback: site builds and runs even without Sanity configured
 - ✅ Automatic revalidation: new posts appear within 5 minutes or instantly via webhook
 - ✅ SEO preserved: all metadata, slugs, and URLs remain the same
@@ -27,35 +27,40 @@ The blog now uses **Sanity** as a headless CMS, allowing you to add, edit, and p
 
 ---
 
-## Step 2: Install the Sanity CLI and Set Up the Schema
+## Step 2: Deploy the Sanity Studio
 
-On your local machine or development environment:
+The Studio is located in the `studio/` folder and deploys separately to avoid any conflicts with the main website.
 
-1. Install the Sanity CLI globally:
+### From your local machine:
+
+1. Navigate to the studio folder:
    ```bash
-   npm install -g @sanity/cli
+   cd studio
    ```
 
-2. Navigate to your project directory:
+2. Install dependencies:
    ```bash
-   cd mitra-tech
+   npm install
    ```
 
-3. Initialize Sanity in the project (this creates the schema files):
+3. Create `.env.local` with your Sanity credentials:
    ```bash
-   sanity init --project-id YOUR_PROJECT_ID --dataset production
+   SANITY_STUDIO_PROJECT_ID=your_project_id_from_step_1
+   SANITY_STUDIO_DATASET=production
    ```
-   
-   When prompted:
-   - Use the existing schema files in `sanity/schemas/`
-   - Skip creating a new schema
-   - The schema is already configured with the blog post structure
 
-4. Deploy the schema to Sanity:
+4. Deploy the Studio to Sanity hosting:
    ```bash
-   cd sanity
-   sanity schema deploy
+   npm run deploy
    ```
+
+5. When prompted:
+   - Choose a unique studio hostname (e.g., `mitratech-blog`)
+   - This creates a URL like: `https://mitratech-blog.sanity.studio`
+
+6. **Save this URL!** This is where you'll manage blog posts.
+
+**Note:** You only need to deploy the Studio once. It stays separate from your main website deployments.
 
 ---
 
@@ -63,7 +68,7 @@ On your local machine or development environment:
 
 1. In your Sanity project dashboard at [sanity.io/manage](https://www.sanity.io/manage), go to **Settings → API**
 2. Click **"+ Add API Token"**
-3. Give it a name like "Migration Script"
+3. Give it a name like "Website & Migration"
 4. Select **"Editor"** permissions (read + write)
 5. Click **"Add Token"** and copy the token (you won't see it again!)
 
@@ -81,8 +86,8 @@ Add these environment variables in the **Vercel Dashboard**:
 |--------------|-------|-------------|
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | Your project ID from Step 1 | Public Sanity project identifier |
 | `NEXT_PUBLIC_SANITY_DATASET` | `production` | Sanity dataset name |
-| `SANITY_WRITE_TOKEN` | Your token from Step 3 | For migration script only (keep secret!) |
-| `SANITY_REVALIDATE_SECRET` | Generate a random string | For webhook security (e.g., use a UUID) |
+| `SANITY_WRITE_TOKEN` | Your token from Step 3 | For migration script (keep secret!) |
+| `SANITY_REVALIDATE_SECRET` | Generate a random string | For webhook security |
 
 **How to generate a random secret:**
 ```bash
@@ -103,30 +108,24 @@ This imports your 6 existing blog posts into Sanity. Run this **once** after set
 
 ### On your local machine:
 
-1. Clone the repository (if not already):
+1. From the project root (not the `studio/` folder):
    ```bash
-   git clone <your-repo-url>
-   cd mitra-tech
+   cd ..  # if you're still in studio/
    ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env.local` file with your Sanity credentials:
+2. Create a `.env.local` file in the root with your Sanity credentials:
    ```bash
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
    SANITY_WRITE_TOKEN=your_write_token
    ```
 
-4. Run the migration script:
+3. Run the migration script:
    ```bash
    npm run migrate:blog
    ```
 
-5. You should see output like:
+4. You should see output like:
    ```
    Starting blog post migration to Sanity...
    
@@ -143,15 +142,7 @@ This imports your 6 existing blog posts into Sanity. Run this **once** after set
 
 ## Step 6: Access the Sanity Studio
 
-1. Go to [sanity.io/manage](https://www.sanity.io/manage)
-2. Select your "MitraTech Blog" project
-3. Click **"Open Studio"** or **"Content"** in the sidebar
-4. You should see all your imported blog posts in the Studio!
-
-**Alternatively**, you can access the Studio directly at:
-```
-https://your-project-id.sanity.studio/desk
-```
+Open your Studio URL from Step 2 (e.g., `https://mitratech-blog.sanity.studio`) and log in with your Sanity account. You should see all your imported blog posts!
 
 ---
 
@@ -183,7 +174,7 @@ https://your-project-id.sanity.studio/desk
 
 For instant updates without waiting 5 minutes:
 
-1. In your Sanity project dashboard, go to **Settings → Webhooks**
+1. In your Sanity project dashboard at [sanity.io/manage](https://www.sanity.io/manage), go to **Settings → Webhooks**
 2. Click **"Create webhook"**
 3. Configure:
    - **Name:** Vercel Revalidation
@@ -256,6 +247,7 @@ The content field supports **markdown**. Here are some examples:
 ### Migration script errors
 - Ensure `SANITY_WRITE_TOKEN` is set and has Editor permissions
 - Check that the token hasn't expired
+- Make sure you're in the project root (not the `studio/` folder)
 - Run `npm install` before running the script
 
 ### Images not showing
@@ -263,21 +255,27 @@ The content field supports **markdown**. Here are some examples:
 - If uploading, ensure the image is under 4MB
 
 ### Can't access Sanity Studio
-- Make sure you're logged in to sanity.io
-- Verify you have access to the project
-- Check that the project ID is correct
+- Make sure you deployed the Studio (Step 2)
+- Verify you're logged in to sanity.io
+- Check that the Studio URL is correct
+- Try clearing browser cache and logging in again
+
+### Need to redeploy the Studio
+If you make changes to the Studio schema or configuration:
+```bash
+cd studio
+npm run deploy
+```
 
 ---
 
-## Why Hosted Studio?
+## Studio Architecture
 
-We use Sanity's hosted Studio (at sanity.io/manage) instead of an embedded Studio for several reasons:
-
-1. **Better Performance:** No Studio bundle in your production build
-2. **Automatic Updates:** Sanity maintains and updates the Studio
-3. **Better Security:** Isolated from your production site
-4. **Professional Features:** Access to all Studio plugins and features
-5. **Mobile Access:** Manage content from any device with a browser
+The Studio is located in the `studio/` folder and has:
+- Its own `package.json` with Sanity v3 (compatible with React 18)
+- Separate from the main website to avoid dependency conflicts
+- Deployed independently to `*.sanity.studio` hosting
+- Only needs to be deployed once (unless you change the schema)
 
 ---
 
