@@ -1,19 +1,36 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Sparkles, Search, Clock, ArrowRight, Tag } from "lucide-react";
-import { BLOG_POSTS } from "@/constants/blogData";
+import { BlogPost } from "@/types";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
 export default function BlogPage() {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadPosts() {
+      try {
+        const response = await fetch("/api/blog");
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error("Error loading blog posts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadPosts();
+  }, []);
 
   const categories = ["All", "AI & Products", "Development", "Design", "Marketing"];
 
-  const filteredPosts = BLOG_POSTS.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const matchesCategory = activeCategory === "All" || post.category === activeCategory;
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -71,8 +88,13 @@ export default function BlogPage() {
 
       {/* Blog Cards Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
+        {isLoading ? (
+          <div className="text-center text-slate-400 py-12">Loading posts...</div>
+        ) : filteredPosts.length === 0 ? (
+          <div className="text-center text-slate-400 py-12">No posts found</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPosts.map((post) => (
             <article
               key={post.id}
               className="group rounded-2xl glass-panel border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-blue-500/50 transition-all duration-300"
@@ -127,8 +149,9 @@ export default function BlogPage() {
                 </Link>
               </div>
             </article>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <CtaBanner />

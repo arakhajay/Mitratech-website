@@ -1,9 +1,9 @@
 import { MetadataRoute } from "next";
 import { SERVICES_DATA } from "@/constants/servicesData";
 import { PRODUCTS_DATA } from "@/constants/productsData";
-import { BLOG_POSTS } from "@/constants/blogData";
+import { getAllBlogPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.mitratechservices.in";
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -89,7 +89,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+  const posts = await getAllBlogPosts();
+  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.publishedAt),
     changeFrequency: "monthly",

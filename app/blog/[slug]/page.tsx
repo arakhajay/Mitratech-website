@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar, User, Tag, Sparkles } from "lucide-react";
-import { BLOG_POSTS } from "@/constants/blogData";
+import { getAllBlogPosts, getBlogPostBySlugWithFallback } from "@/lib/blog";
 import { getArticleSchema, getBreadcrumbSchema } from "@/lib/jsonld";
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { ArrowRight, Bot, Code2, Search, Zap } from "lucide-react";
@@ -13,14 +13,15 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = await getBlogPostBySlugWithFallback(slug);
   if (!post) return { title: "Post Not Found" };
 
   const url = `https://www.mitratechservices.in/blog/${slug}`;
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = await getBlogPostBySlugWithFallback(slug);
 
   if (!post) {
     notFound();
