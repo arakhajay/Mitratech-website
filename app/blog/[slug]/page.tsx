@@ -7,6 +7,7 @@ import { getAllBlogPosts, getBlogPostBySlugWithFallback } from "@/lib/blog";
 import { getArticleSchema, getBreadcrumbSchema } from "@/lib/jsonld";
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { ArrowRight, Bot, Code2, Search, Zap } from "lucide-react";
+import { MarkdownContent } from "@/components/blog/MarkdownContent";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -121,10 +122,8 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Post Content */}
-        <div className="prose prose-invert prose-blue max-w-none text-slate-300 space-y-6 text-sm sm:text-base leading-relaxed">
-          {post.content.split("\n\n").map((paragraph, idx) => (
-            <p key={idx}>{paragraph}</p>
-          ))}
+        <div className="text-sm sm:text-base leading-relaxed">
+          <MarkdownContent content={post.content} />
         </div>
 
         {/* Hub-and-Spoke: Recommended Solutions Box */}
